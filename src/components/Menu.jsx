@@ -63,8 +63,8 @@ function BottomAppBar(props) {
     setOpen(false);
   };
 
-  const onClickAdd =(nombre,precio)=>{
-    setLista([...lista, nombre,precio])
+  const onClickAdd =(nombre)=>{
+    setLista([...lista, nombre])
   }
 
   return (
@@ -83,7 +83,7 @@ function BottomAppBar(props) {
                 <ListItemAvatar>
                   <Avatar alt="Profile Picture" />
                 </ListItemAvatar>
-                <ListItemText primary={item.tituloNombre} secondary={item.tituloPrecio}/>
+                <ListItemText primary={item.tituloNombre} />
               </ListItem>
             </React.Fragment>
           ))}

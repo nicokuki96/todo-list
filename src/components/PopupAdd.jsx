@@ -26,8 +26,7 @@ function PopupAdd(props) {
     }
     const nuevoNombre={
       id:uniqid(),
-      tituloNombre:nombre,
-      tituloPrecio: precio
+      tituloNombre:nombre
     }
     onClickIngresar(nuevoNombre)
     setNombre('')
