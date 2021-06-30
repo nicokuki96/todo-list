@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Fab from '@material-ui/core/Fab';
 import List from '@material-ui/core/List';
@@ -18,6 +19,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -63,8 +66,17 @@ function BottomAppBar(props) {
     setOpen(false);
   };
 
-  const onClickAdd =(nombre)=>{
-    setLista([...lista, nombre])
+  const onClickAdd =(item)=>{
+    setLista([...lista, item])
+  }
+
+  const onClickEdicion = (id, nombre)=>{
+    
+  }
+
+  const borrar = (id) => {
+    const nuevoArray = lista.filter (item => item.id !== id) //que concha hace aca
+    setLista(nuevoArray)
   }
 
   return (
@@ -83,7 +95,9 @@ function BottomAppBar(props) {
                 <ListItemAvatar>
                   <Avatar alt="Profile Picture" />
                 </ListItemAvatar>
-                <ListItemText primary={item.tituloNombre} />
+                <ListItemText primary={item.tituloNombre} secondary={item.tituloPrecio}/>
+                <Button onClick={() => {borrar(item.id)}} variant="contained" color="secondary"><DeleteIcon /></Button>
+                <Button onClick={() => {onClickEdicion(item.id)}} variant="contained"><EditIcon /></Button>
               </ListItem>
             </React.Fragment>
           ))}

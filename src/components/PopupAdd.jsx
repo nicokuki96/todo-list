@@ -15,6 +15,8 @@ function PopupAdd(props) {
   
   const [nombre, setNombre] = React.useState('');
   const [precio, setPrecio] = React.useState('');
+  const [edicion, setEdicion] = React.useState(false);
+  const [setId, Id] = React.useState('');
   const [error, setError] = React.useState(null);
   
 
@@ -24,14 +26,22 @@ function PopupAdd(props) {
         setError('El nombre esta vacio')
         return
     }
-    const nuevoNombre={
+    const nuevoItem={
       id:uniqid(),
-      tituloNombre:nombre
+      tituloNombre:nombre,
+      tituloPrecio: precio
     }
-    onClickIngresar(nuevoNombre)
+    onClickIngresar(nuevoItem)
     setNombre('')
+    setPrecio('')
     setError(null)
     
+  }
+
+  const editar = (item) =>{
+    setEdicion(true)
+    setNombre(item.tituloNombre)
+    setId(item.id)
   }
   
 
