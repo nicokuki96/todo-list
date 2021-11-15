@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/App.css"],"names":[],"mappings":"AAAA,qBACE,yBACF,CAEA,wBACE,WACF","file":"main.8b949596.chunk.css","sourcesContent":[".MuiPaper-elevation1 {\r\n  box-shadow: none !important;\r\n}\r\n\r\n.MuiDialog-paperWidthSm {\r\n  width: 400px;\r\n}\r\n"]}
