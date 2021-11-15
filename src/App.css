@@ -1,0 +1,7 @@
+.MuiPaper-elevation1 {
+  box-shadow: none !important;
+}
+
+.MuiDialog-paperWidthSm {
+  width: 400px;
+}
