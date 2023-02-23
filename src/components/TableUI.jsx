@@ -21,19 +21,24 @@ const TableUI = () => {
   const [edit, setAEdit] = useState(false);
   const [users, setUsers] = useState([]);
   const [userSeleccionado, setUserSeleccionado] = useState("");
+  const [showError, setShowError] = useState(false);
 
   const addRow = () => {
-    const newUser = {
-      key: uuid(),
-      name: name,
-      surname: surname,
-      age: age,
-    };
-    setUsers([...users, newUser]);
-    console.log([...users, newUser]);
-    setName("");
-    setSurname("");
-    setAge("");
+    if (age > 0) {
+      const newUser = {
+        key: uuid(),
+        name: name,
+        surname: surname,
+        age: age,
+      };
+      setUsers([...users, newUser]);
+      setName("");
+      setSurname("");
+      setAge("");
+      setShowError(false);
+    } else {
+      setShowError(true);
+    }
   };
 
   const deleteRow = (idSelected) => {
@@ -54,19 +59,24 @@ const TableUI = () => {
   };
 
   const saveRow = () => {
-    const update = users.map((item) => {
-      if (item.key === userSeleccionado) {
-        return { key: item.key, name, surname, age };
-      } else {
-        return item;
-      }
-    });
-    setAEdit(false);
-    setUsers(update);
-    setUserSeleccionado("");
-    setName("");
-    setSurname("");
-    setAge("");
+    if (age > 0) {
+      const update = users.map((item) => {
+        if (item.key === userSeleccionado) {
+          return { key: item.key, name, surname, age };
+        } else {
+          return item;
+        }
+      });
+      setAEdit(false);
+      setUsers(update);
+      setUserSeleccionado("");
+      setName("");
+      setSurname("");
+      setAge("");
+      setShowError(false);
+    } else {
+      setShowError(true);
+    }
   };
 
   return (
@@ -123,10 +133,11 @@ const TableUI = () => {
                 </TableCell>
                 <TableCell align="right">
                   <TextField
+                    error={showError}
                     onChange={(e) => setAge(e.target.value)}
                     value={age}
                     id="age"
-                    label="Age"
+                    label={showError ? "Error" : "Age"}
                     variant="standard"
                     type="number"
                   />
