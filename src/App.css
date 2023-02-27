@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+.btnConfig {
+  width: 128px;
+}
+
+@media (max-width: 600px) {
+  .css-1d6rb0y-MuiPaper-root-MuiAlert-root {
+    font-size: 12px !important;
+    padding: 0px 5px !important;
+    margin-left: 0 !important;
+    width: 92px;
+  }
+  .MuiAlert-icon.css-1ytlwq5-MuiAlert-icon{
+    display: none;
+  }
+
+}

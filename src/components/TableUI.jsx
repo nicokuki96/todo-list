@@ -13,6 +13,7 @@ import Button from "@mui/material/Button";
 import uuid from "react-uuid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import Alert from "@mui/material/Alert";
 
 const TableUI = () => {
   const [name, setName] = useState("");
@@ -24,7 +25,9 @@ const TableUI = () => {
   const [showError, setShowError] = useState(false);
 
   const addRow = () => {
-    if (age > 0) {
+    if (age < 0 || !age || !name || !surname) {
+      setShowError(true);
+    } else {
       const newUser = {
         key: uuid(),
         name: name,
@@ -36,8 +39,6 @@ const TableUI = () => {
       setSurname("");
       setAge("");
       setShowError(false);
-    } else {
-      setShowError(true);
     }
   };
 
@@ -59,7 +60,9 @@ const TableUI = () => {
   };
 
   const saveRow = () => {
-    if (age > 0) {
+    if (age < 0 || !age || !name || !surname) {
+      setShowError(true);
+    } else {
       const update = users.map((item) => {
         if (item.key === userSeleccionado) {
           return { key: item.key, name, surname, age };
@@ -74,8 +77,6 @@ const TableUI = () => {
       setSurname("");
       setAge("");
       setShowError(false);
-    } else {
-      setShowError(true);
     }
   };
 
@@ -112,12 +113,18 @@ const TableUI = () => {
                       <AddCircleOutlinedIcon />
                     </Button>
                   )}
+                  {showError && (
+                    <Alert severity="error" sx={{ m: 2 }}>
+                      The fields must be complete and the age must be greater
+                      than 0
+                    </Alert>
+                  )}
                 </TableCell>
                 <TableCell align="right">
                   <TextField
                     onChange={(e) => setName(e.target.value)}
                     id="name"
-                    label="Name"
+                    label={"Name"}
                     variant="standard"
                     value={name}
                   />
@@ -127,17 +134,16 @@ const TableUI = () => {
                     onChange={(e) => setSurname(e.target.value)}
                     value={surname}
                     id="surname"
-                    label="Surname"
+                    label={"Surname"}
                     variant="standard"
                   />
                 </TableCell>
                 <TableCell align="right">
                   <TextField
-                    error={showError}
                     onChange={(e) => setAge(e.target.value)}
                     value={age}
                     id="age"
-                    label={showError ? "Error" : "Age"}
+                    label={"Age"}
                     variant="standard"
                     type="number"
                   />
@@ -149,20 +155,22 @@ const TableUI = () => {
                   <TableCell>{item.name}</TableCell>
                   <TableCell>{item.surname}</TableCell>
                   <TableCell>{item.age}</TableCell>
-                  <Button
-                    id="btnDelete"
-                    onClick={() => deleteRow(item.key)}
-                    color="error"
-                  >
-                    <DeleteIcon />
-                  </Button>
-                  <Button
-                    id="btnEdit"
-                    onClick={() => editRow(item)}
-                    color="success"
-                  >
-                    <EditIcon />
-                  </Button>
+                  <TableCell className="btnConfig">
+                    <Button
+                      id="btnDelete"
+                      onClick={() => deleteRow(item.key)}
+                      color="error"
+                    >
+                      <DeleteIcon />
+                    </Button>
+                    <Button
+                      id="btnEdit"
+                      onClick={() => editRow(item)}
+                      color="success"
+                    >
+                      <EditIcon />
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
